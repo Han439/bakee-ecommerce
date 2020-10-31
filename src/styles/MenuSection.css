@@ -1,0 +1,43 @@
+:root {
+  --main-color: #ffb367;
+  --bg-color: #f1eef1;
+  --main-text-color: #707070;
+}
+
+* {
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+.menu-title {
+  margin: 25px 0;
+  font-size: 1.5rem;
+}
+
+.menu-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 150px);
+  justify-content: left;
+  grid-gap: 20px;
+}
+
+.banner-layout {
+  width: 85%;
+}
+
+@media (max-width: 550px) {
+  .banner-layout {
+    display: none;
+    margin: 20px auto;
+  }
+
+  .menu-title {
+    display: none;
+  }
+
+  .menu-layout {
+    grid-template-columns: repeat(auto-fit, 80px);
+    justify-content: center;
+  }
+}

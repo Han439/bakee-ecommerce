@@ -1,0 +1,136 @@
+{% load premailer %}
+
+{% premailer "http://127.0.0.1:8000/" %}
+<html>
+    <style type="text/css">
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        section {
+            width: 80%;
+            margin: 0px auto;
+        }
+
+        .header, .items-section {
+            padding-bottom: 25px;
+            border-bottom: 1px solid #707070;
+        }
+
+        .items-section {
+            padding-bottom: 10px;
+        }
+
+        .header {
+            text-align: center;
+        }
+
+        .header, section {
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 0px;
+            padding-bottom: 0px;
+        }
+
+        .header p {
+            color: #707070;
+            font-size: 13px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        .item-table {
+            padding-bottom: 10px;
+            border-bottom: 1px solid #707070;
+        }
+
+        table tr td, table tr th {
+            text-align: left;
+        }
+
+        table tr td {
+            color:#707070;
+        }
+
+        table .first-col {
+            width: 50%;
+            margin-right: 10px;
+        }
+
+        table .second-col {
+            width: 20%;
+        }
+
+        table .last-col {
+            width: 20%;
+        }
+
+        .footer {
+            margin: 60px 0 10px;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #ffb367;
+            font-size: 28px;
+        }
+
+
+    </style>
+        
+    <body>
+        <main class="main-layout">
+            <section class="header">
+                <h1>We've got your order</h1>
+                <p>Thank you for choosing Bakee's service</p>
+            </section>
+            <section class="items-section">
+                <table class="items-table">
+                    <tr>
+                        <th class="first-col">ITEM</th>
+                        <th class="second-col">QTY</th>
+                        <th class="last-col">PRICE</th>
+                    </tr>
+                    {% for item in cart %}
+                    <tr>
+                        <td class="first-col">{{item.name}}</td>
+                        <td class="second-col">{{item.quantity}}</td>
+                        <td class="last-col">${{item.basePrice}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </section>
+            <section>
+                <table>
+                    <tr>
+                        <th class="first-col">BILLED & DELIVER TO:</th>
+                        <td class="second-col">Delivery fee</td>
+                        <td class="last-col">${{deliveryFee}}</td>
+                    </tr>
+                    <tr>
+                        <td class="first-col">{{name}}</td>
+                        <td class="second-col-col">Total</td>
+                        <td class="last-col">${{price}}</td>
+                    </tr>
+                    <tr>
+                        <td class="first-col">{{phone}}</td>
+                    </tr>
+                    <tr>
+                        <td class="first-col">{{address}}</td>
+                    </tr>
+                </table>
+            </section>
+            <footer class="footer"><a href="{% url 'main-view' %}">BAKEE</a></footer>
+        </main>
+    </body>
+
+</html>
+{% endpremailer %}

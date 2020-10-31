@@ -192,6 +192,8 @@ class CheckOut extends React.Component {
 
     const data = { name, phone, mail, address, cart, price, deliveryFee };
 
+    const postData = JSON.stringify(data);
+
     // prepare for api call
     const cookies = new Cookies();
     const url = "http://127.0.0.1:8000/api/order/";

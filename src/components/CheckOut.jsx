@@ -196,7 +196,7 @@ class CheckOut extends React.Component {
 
     // prepare for api call
     const cookies = new Cookies();
-    const url = "http://127.0.0.1:8000/api/order/";
+    const url = "/api/order/";
     trackPromise(
       axios
         .request({

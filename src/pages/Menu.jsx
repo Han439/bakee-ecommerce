@@ -148,7 +148,7 @@ class App extends React.Component {
     };
 
     axios
-      .get("http://127.0.0.1:8000/api/product/")
+      .get("/api/product/")
       .then((res) => {
         this.setState({ data: res.data });
         let storage = localStorage.getItem("cart");

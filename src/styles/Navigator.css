@@ -62,7 +62,7 @@
         flex-direction: column;
         justify-content: space-evenly !important;
         align-items: center;
-        z-index: 100;
+        z-index: 20;
     }
     .burger .link {
         color: var(--shadow-color);
@@ -80,7 +80,7 @@
         left: 30px;
         top: 40px;
         cursor: pointer;
-        z-index: 110;
+        z-index: 21;
     }
     .bars .fa-times {
         color: var(--shadow-color);

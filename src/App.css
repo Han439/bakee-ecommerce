@@ -188,7 +188,7 @@ img {
         width: 100%;
         top: 0;
         left: 0;
-        z-index: 20;
+        z-index: 30;
     }
     .cart-icon {
         display: block;
@@ -225,6 +225,9 @@ img {
 }
 
 @media (max-width: 550px) {
+    .category-layout {
+        align-self: center;
+    }
     .store-info li,
     .opening-info li {
         font-size: 13px;

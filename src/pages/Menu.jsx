@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import shortid from "shortid";
 import "../App.css";
 import AppLayout from "../components/AppLayout";
 import Cart from "../components/Cart";

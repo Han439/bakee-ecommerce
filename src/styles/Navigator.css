@@ -80,7 +80,7 @@
         left: 30px;
         top: 40px;
         cursor: pointer;
-        z-index: 11;
+        z-index: 110;
     }
     .bars .fa-times {
         color: var(--shadow-color);

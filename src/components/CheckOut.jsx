@@ -186,7 +186,7 @@ class CheckOut extends React.Component {
 
     const cart = JSON.stringify(paymentInfo.products);
 
-    const price = Number(paymentInfo.subTotal + paymentInfo.deliver).toFixed(2);
+    const price = Number(paymentInfo.subTotal).toFixed(2);
 
     const deliveryFee = Number(paymentInfo.deliver).toFixed(2);
 

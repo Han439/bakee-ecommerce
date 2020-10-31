@@ -36,7 +36,7 @@ class OrderCreateView(APIView):
                     'phone': data['phone'],
                     'address': data['address'],
                     'cart': json.loads(data['cart']),
-                    'price': data['price'],
+                    'price': float(data['price']) + float(data['deliveryFee']),
                     'deliveryFee': data['deliveryFee']
                 }
                 html_content = render_to_string(

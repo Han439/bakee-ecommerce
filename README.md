@@ -4,10 +4,13 @@ The project is currently deploy on heroku and using  AWS S3 bucket for managing 
 ## DEMO
 https://bakeestore.herokuapp.com/
 ## TECHNOLOGIES
-### FRONT-END
+#### FRONT-END
 - [React](https://github.com/facebook/react) - React is a JavaScript library for building user interfaces.
 - [Google Map API]
-### BACKEND
+#### BACKEND
 - [Django](https://github.com/django/django) - The high-level Python Web framework that encourages rapid development and clean, pragmatic design. Thanks for checking it out.
 - [Django Rest Framework](https://github.com/encode/django-rest-framework) - A powerful and flexible toolkit for building Web APIs.
 ## RESOURCES
+- [Page Logo](https://www.flaticon.com/authors/good-ware)
+- https://www.freepik.com/vectors/banner
+- https://www.pexels.com/search/cake/

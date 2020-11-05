@@ -20,10 +20,10 @@ from rest_framework import status
 
 class OrderCreateView(APIView):
 
-    def get(self, request):
-        queryset = Order.objects.all()
-        serializer = OrderSerializer(queryset, many=True)
-        return Response(serializer.data)
+    # def get(self, request):
+    #     queryset = Order.objects.all()
+    #     serializer = OrderSerializer(queryset, many=True)
+    #     return Response(serializer.data)
 
     def post(self, request):
         data = request.data

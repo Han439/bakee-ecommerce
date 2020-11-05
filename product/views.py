@@ -13,4 +13,3 @@ from rest_framework import permissions
 class ProductList(generics.ListAPIView):
     queryset = Product.objects.all().order_by("-date_added")
     serializer_class = ProductSerializer
-    permission_classes = (permissions.AllowAny,)

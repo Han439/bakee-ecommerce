@@ -1,7 +1,18 @@
-from django.test import TestCase
+from django.test import TestCase, SimpleTestCase
+from django.urls import reverse, resolve
+
+from . import views
+
 from rest_framework.test import APIClient
 
 # Create your tests here.
+
+
+class TestUrls(SimpleTestCase):
+
+    def test_order_create_url_resolve(self):
+        url = reverse('order-create')
+        self.assertEqual(resolve(url).func.view_class, views.OrderCreateView)
 
 
 class ViewsTest(TestCase):
@@ -22,5 +33,10 @@ class ViewsTest(TestCase):
 
         response = client.post('/api/order/', input_data, format='json')
 
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue('success' in response.data)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertIn(response.data, 'success')
+
+    def test_order_create_view_with_no_data(self):
+        client = APIClient()
+        response = client.post('/api/order/', format='json')
+        self.assertEqual(response.status_code, 400)

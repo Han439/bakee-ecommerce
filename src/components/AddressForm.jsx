@@ -22,7 +22,6 @@ class AddressForm extends React.Component {
         value={values.address}
         onChange={this.handleChange}
         searchOptions={searchOptions}
-        // onSelect={this.handleSelect}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <>

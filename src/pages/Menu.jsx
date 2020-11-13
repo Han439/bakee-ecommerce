@@ -22,18 +22,6 @@ class App extends React.Component {
       cartAnimation: false,
       cart: { products: [], subTotal: 0, deliver: 0 },
     };
-    this.handleDrinkCategory = this.handleDrinkCategory.bind(this);
-    this.handleCakeCategory = this.handleCakeCategory.bind(this);
-    this.handleAddToCart = this.handleAddToCart.bind(this);
-    this.handleAddMore = this.handleAddMore.bind(this);
-    this.handleReduce = this.handleReduce.bind(this);
-    this.handleRemoveFromCart = this.handleRemoveFromCart.bind(this);
-    this.handleCheckOut = this.handleCheckOut.bind(this);
-    this.handlePayment = this.handlePayment.bind(this);
-    this.resetCart = this.resetCart.bind(this);
-    this.handleResultBox = this.handleResultBox.bind(this);
-    this.handleCartMobile = this.handleCartMobile.bind(this);
-    this.handleDeliveryFee = this.handleDeliveryFee.bind(this);
   }
 
   handleDeliveryFee = (deliver) => {
@@ -182,6 +170,7 @@ class App extends React.Component {
           nav={<Navigator />}
           side={
             <Category
+              category={category}
               onCakeChange={this.handleCakeCategory}
               onDrinkChange={this.handleDrinkCategory}
             />

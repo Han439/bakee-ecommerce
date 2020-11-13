@@ -13,10 +13,13 @@
         "react-dom": "^16.14.0",
         "react-places-autocomplete": "^7.3.0",
         "react-promise-tracker": "^2.1.0",
+        "react-redux": "^7.2.2",
         "react-router-dom": "^5.2.0",
         "react-scripts": "3.4.3",
         "react-slideshow-image": "^3.3.0",
         "react-spinners": "^0.9.0",
+        "redux": "^4.0.5",
+        "redux-thunk": "^2.3.0",
         "shortid": "^2.2.16",
         "universal-cookie": "^4.0.4"
     },
@@ -36,14 +39,14 @@
     },
     "browserslist": {
         "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
         "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
     }
 }

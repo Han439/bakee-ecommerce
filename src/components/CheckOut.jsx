@@ -37,17 +37,6 @@ class CheckOut extends React.Component {
         address: "",
       },
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleAddressChange = this.handleAddressChange.bind(this);
-    this.nextStep = this.nextStep.bind(this);
-    this.previousStep = this.previousStep.bind(this);
-    this.renderSwitch = this.renderSwitch.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.validateInput = this.validateInput.bind(this);
-    this.validateAddress = this.validateAddress.bind(this);
-    this.isValidated = this.isValidated.bind(this);
-    this.calculateDeliveryFee = this.calculateDeliveryFee.bind(this);
-    this.callback = this.callback.bind(this);
   }
 
   calculateDeliveryFee = () => {

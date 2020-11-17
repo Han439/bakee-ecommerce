@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { trackPromise } from "react-promise-tracker";
@@ -9,7 +10,9 @@ import AddressForm from "./AddressForm";
 import InfoForm from "./InfoForm";
 import PlaceOrder from "./PlaceOrder";
 import Loader from "./Loader";
-import OrderResult from "./OrderResult";
+import { orderSuccess, orderFail } from "../redux/actions/orderResultActions";
+import { closeCheckOutBox } from "../redux/actions/checkOutBoxActions";
+import { resetCart, setDeliveryFee } from "../redux/actions/cartActions";
 
 /*global google*/
 
@@ -67,7 +70,7 @@ class CheckOut extends React.Component {
       console.log(response.rows[0].elements[0].distance);
       const distance = response.rows[0].elements[0].distance.value / 1000;
       const deliver = Number(distance * fair).toFixed(2);
-      this.props.handleDeliveryFee(deliver);
+      this.props.setDeliveryFee(deliver);
     }
   };
 
@@ -142,7 +145,7 @@ class CheckOut extends React.Component {
   };
 
   renderSwitch = (step) => {
-    const { paymentInfo } = this.props;
+    const { cart } = this.props;
     const { formValidate, name, phone, mail, address } = this.state;
     let values = { name, phone, mail, address };
     switch (step) {
@@ -163,21 +166,25 @@ class CheckOut extends React.Component {
           />
         );
       case 2:
-        return <PlaceOrder paymentInfo={paymentInfo} values={values} />;
+        return <PlaceOrder paymentInfo={cart} values={values} />;
+      default:
+        return null;
     }
   };
 
   handleSubmit = () => {
     // prepare data for posting
-    let { paymentInfo, handleResultBox, updateResult } = this.props;
+    let { orderSuccess, orderFail, closeCheckOutBox, resetCart } = this.props;
+
+    let cartData = this.props.cart;
 
     const { name, phone, mail, address } = this.state;
 
-    const cart = JSON.stringify(paymentInfo.products);
+    const cart = JSON.stringify(cartData.products);
 
-    const price = Number(paymentInfo.subTotal).toFixed(2);
+    const price = Number(cartData.subTotal).toFixed(2);
 
-    const deliveryFee = Number(paymentInfo.deliver).toFixed(2);
+    const deliveryFee = Number(cartData.deliveryFee).toFixed(2);
 
     const data = { name, phone, mail, address, cart, price, deliveryFee };
 
@@ -185,7 +192,7 @@ class CheckOut extends React.Component {
 
     // prepare for api call
     const cookies = new Cookies();
-    const url = "/api/order/";
+    const url = "http://127.0.0.1:8000/api/order/";
     trackPromise(
       axios
         .request({
@@ -199,13 +206,12 @@ class CheckOut extends React.Component {
           },
         })
         .then((response) => {
-          this.props.onReset();
-          handleResultBox();
-          updateResult();
+          resetCart();
+          closeCheckOutBox();
+          orderSuccess();
         })
         .catch((error) => {
-          handleResultBox();
-          updateResult(false);
+          orderFail();
         })
     );
   };
@@ -228,8 +234,8 @@ class CheckOut extends React.Component {
   }
 
   render() {
-    let { onCheckOut } = this.props;
-    let { step, result, isSuccess } = this.state;
+    let { closeCheckOutBox } = this.props;
+    let { step } = this.state;
     const header = [
       "Who are we deliver to?",
       "Where are we deliver to?",
@@ -239,7 +245,7 @@ class CheckOut extends React.Component {
       <>
         <PopBox
           header={header[step]}
-          onCheckOut={onCheckOut}
+          onCloseBox={closeCheckOutBox}
           body={
             <>
               <div className="inputField scroll-bar scroll-bar-transparent">
@@ -272,4 +278,16 @@ class CheckOut extends React.Component {
   }
 }
 
-export default CheckOut;
+const mapStateToProps = ({ cart }) => ({
+  cart,
+});
+
+const mapDispatchToProps = {
+  resetCart,
+  setDeliveryFee,
+  orderSuccess,
+  orderFail,
+  closeCheckOutBox,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckOut);

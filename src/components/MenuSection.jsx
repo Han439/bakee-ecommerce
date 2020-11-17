@@ -1,34 +1,39 @@
 import React from "react";
-import '../App.css';
-import '../styles/MenuSection.css';
-import FoodCard from './FoodCard';
-import Banner from './Banner';
+import { useEffect } from "react";
+import { connect } from "react-redux";
+import fetchMenuData from "../redux/actions/menuActions";
+import "../App.css";
+import "../styles/MenuSection.css";
+import FoodCard from "./FoodCard";
+import Banner from "./Banner";
 
-class MenuSection extends React.Component {
+function MenuSection({ category, menu, fetchMenuData }) {
+  useEffect(() => fetchMenuData(), []);
 
-  render() {
-    const category = this.props.category;
-    let cards = [];
-    this.props.products.forEach((product) => {
-      if (product.category === category) {
-        cards.push(
-          <FoodCard product={product} key={product.name} onAddToCart={this.props.onAddToCart}/>
-        )
-      }
-    });
+  let cards = [];
+  menu.forEach((product) => {
+    if (product.category === category) {
+      cards.push(<FoodCard product={product} key={product.id} />);
+    }
+  });
+  return (
+    <>
+      <div className="banner-layout">
+        <Banner />
+      </div>
+      <p className="menu-title">Our Menu</p>
+      <div className="menu-layout">{cards}</div>
+    </>
+  );
+}
 
-    return (
-      <>
-        <div className="banner-layout">
-          <Banner />
-        </div>
-        <p className="menu-title">Our Menu</p>
-        <div className="menu-layout">
-          {cards}
-        </div>
-      </>
-    );
-  }
+const mapStateToProps = ({ category, menu }) => ({
+  category,
+  menu,
+});
+
+const mapDispatchToProps = {
+  fetchMenuData,
 };
 
-export default MenuSection;
+export default connect(mapStateToProps, mapDispatchToProps)(MenuSection);

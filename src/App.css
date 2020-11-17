@@ -140,6 +140,11 @@ img {
     font-weight: 550;
 }
 
+.btn:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
 
 /* Scroll bar */
 

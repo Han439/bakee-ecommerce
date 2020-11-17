@@ -38,7 +38,7 @@ const Cart = ({ cart, openCheckOutBox }) => {
         <button
           className="btn check-out-btn"
           onClick={openCheckOutBox}
-          disabled={products.length === 0}
+          disabled={carts.length === 0}
         >
           Check Out
         </button>

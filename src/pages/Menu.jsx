@@ -12,13 +12,7 @@ import CheckOut from "../components/CheckOut";
 import OrderResult from "../components/OrderResult";
 
 const App = (props) => {
-  const {
-    result,
-    cartAnimation,
-    endCartAnimation,
-    displayCheckOut,
-    openCart,
-  } = props;
+  const { result, displayCheckOut } = props;
 
   return (
     <>
@@ -28,13 +22,6 @@ const App = (props) => {
         main={<MenuSection />}
         cart={<Cart />}
       />
-      <div
-        className={cartAnimation ? "cart-icon cart-animation" : "cart-icon"}
-        onClick={openCart}
-        onAnimationEnd={endCartAnimation}
-      >
-        <i className="fas fa-shopping-bag"></i>
-      </div>
       {displayCheckOut && <CheckOut />}
       {result.displayResult && <OrderResult />}
     </>
@@ -45,11 +32,9 @@ const mapStateToProps = ({ result, cart, displayCheckOut, cartAnimation }) => ({
   result,
   cart,
   displayCheckOut,
-  cartAnimation,
 });
 
 const mapDispatchToProps = {
-  openCart,
   endCartAnimation,
 };
 

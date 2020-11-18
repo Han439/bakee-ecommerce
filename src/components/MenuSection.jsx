@@ -9,14 +9,14 @@ import "../styles/MenuSection.css";
 import FoodCard from "./FoodCard";
 import Banner from "./Banner";
 
-function MenuSection({
+const MenuSection = ({
   category,
   menu,
   fetchMenuData,
   openCart,
   cartAnimation,
   endCartAnimation,
-}) {
+}) => {
   useEffect(() => fetchMenuData(), []);
 
   let cards = [];
@@ -41,7 +41,7 @@ function MenuSection({
       </div>
     </>
   );
-}
+};
 
 const mapStateToProps = ({ category, menu, cartAnimation }) => ({
   category,

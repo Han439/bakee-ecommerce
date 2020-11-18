@@ -10,7 +10,6 @@ import "../styles/CartItem.css";
 
 const CartItem = ({
   product,
-  index,
   addQuantity,
   subtractQuantity,
   removeFromCart,

@@ -1,11 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import PopBox from "./PopBox";
+import PopBox from "../hocs/PopBox";
 import { closeOrderBox } from "../redux/actions/orderResultActions";
 import "../App.css";
 import "../styles/OrderResult.css";
 
-const CheckOut = ({ isSuccess, closeOrderBox }) => {
+const OrderResult = ({ isSuccess, closeOrderBox }) => {
   const header = ["SUCCESS", "ERROR"];
   return (
     <PopBox
@@ -44,4 +44,4 @@ const mapDispatchToProps = {
   closeOrderBox,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CheckOut);
+export default connect(mapStateToProps, mapDispatchToProps)(OrderResult);

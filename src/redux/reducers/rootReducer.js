@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 import categoryReducer from './categoryReducer';
 import menuReducer from './menuReducer';
-import cartReducer from './cartReducer';
 import orderResultReducer from './orderResultReducer';
-import checkOutBoxReducer from './checkOutBoxReducer';
+import cartReducer from './cartReducer';
 import cartMobileReducer from './cartMobileReducer';
-import cartAnimationReducer from './cartAnimationReducer'
+import cartAnimationReducer from './cartAnimationReducer';
+import checkOutBoxReducer from './checkOutBoxReducer';
+import checkOutInputReducer from './checkOutInputReducer';
+import checkOutStepReducer from './checkOutStepReducer'
 
 const rootReducer = combineReducers( {
     category: categoryReducer,
@@ -15,6 +17,8 @@ const rootReducer = combineReducers( {
     displayCheckOut: checkOutBoxReducer,
     displayCartMobile: cartMobileReducer,
     cartAnimation: cartAnimationReducer,
+    checkOutInput: checkOutInputReducer,
+    checkOutStep: checkOutStepReducer,
 } )
 
 export default rootReducer

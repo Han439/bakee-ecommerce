@@ -9,19 +9,21 @@ const AppLayout = ({ nav, side, main, cart, displayCartMobile, closeCart }) => {
       <div className="main-layout">
         <div className="main">
           <div className="nav-container col-layout">{nav}</div>
-          <div className="category-layout">{side}</div>
+          {side !== null && <div className="category-layout">{side}</div>}
           <div className="menu-section scroll-bar scroll-bar-transparent">
             {main}
           </div>
         </div>
-        <div
-          className={displayCartMobile ? "cart-layout-mobile" : "cart-layout"}
-        >
-          {cart}
-          <div className="cart-out-icon" onClick={closeCart}>
-            <i className="fas fa-long-arrow-alt-right"></i>
+        {cart !== null && (
+          <div
+            className={displayCartMobile ? "cart-layout-mobile" : "cart-layout"}
+          >
+            {cart}
+            <div className="cart-out-icon" onClick={closeCart}>
+              <i className="fas fa-long-arrow-alt-right"></i>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );

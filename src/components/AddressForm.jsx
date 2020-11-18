@@ -9,50 +9,16 @@ import { setDeliveryFee } from "../redux/actions/cartActions";
 import "../App.css";
 import "../styles/CheckOut.css";
 import PlacesAutocomplete from "react-places-autocomplete";
-import { trackPromise } from "react-promise-tracker";
-import Loader from "./Loader";
 
 /*global google*/
 
 const AddressForm = ({
   address,
-  formValidate,
   handleInputChange,
   previousStep,
   nextStep,
-  setDeliveryFee,
+  calculateDeliveryFee,
 }) => {
-  const calculateDeliveryFee = () => {
-    const origin = new google.maps.LatLng(10.765215, 106.692297);
-    const destination = address;
-    const deliveryService = new google.maps.DistanceMatrixService();
-    trackPromise(
-      deliveryService.getDistanceMatrix(
-        {
-          origins: [origin],
-          destinations: [destination],
-          travelMode: google.maps.TravelMode.DRIVING,
-          unitSystem: google.maps.UnitSystem.METRIC,
-          avoidHighways: false,
-          avoidTolls: false,
-        },
-        callback
-      )
-    );
-  };
-
-  const callback = (response, status) => {
-    const fair = 0.5;
-    if (status !== google.maps.DistanceMatrixStatus.OK) {
-      console.log("error");
-    } else {
-      console.log(response.rows[0].elements[0].distance);
-      const distance = response.rows[0].elements[0].distance.value / 1000;
-      const deliver = Number(distance * fair).toFixed(2);
-      setDeliveryFee(deliver);
-    }
-  };
-
   const searchOptions = {
     location: new google.maps.LatLng(10.765215, 106.692297),
     radius: 500,
@@ -66,12 +32,7 @@ const AddressForm = ({
           onChange={(address) => handleInputChange("address", address)}
           searchOptions={searchOptions}
         >
-          {({
-            getInputProps,
-            suggestions,
-            getSuggestionItemProps,
-            loading,
-          }) => (
+          {({ getInputProps, suggestions, getSuggestionItemProps }) => (
             <>
               <div>
                 <label>Address</label>
@@ -81,9 +42,9 @@ const AddressForm = ({
                     className: "location-search-input",
                   })}
                 />
-                {formValidate.address.length !== 0 && (
+                {/* {formValidate.address.length !== 0 && (
                   <p className="error">{formValidate.address}</p>
-                )}
+                )} */}
               </div>
               <div className="dropdown-container">
                 {/* {loading && <div>Loading...</div>} */}
@@ -117,7 +78,7 @@ const AddressForm = ({
         </button>
         <button
           onClick={() => {
-            calculateDeliveryFee();
+            calculateDeliveryFee(0.5, [10.765215, 106.692297], address);
             nextStep();
           }}
           className="btn next-btn"
@@ -125,7 +86,6 @@ const AddressForm = ({
           Next &rarr;
         </button>
       </div>
-      <Loader />
     </>
   );
 };
@@ -135,7 +95,11 @@ const mapStateToProps = ({ checkOutInput }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setDeliveryFee: (fee) => dispatch(setDeliveryFee(fee)),
+  calculateDeliveryFee: (
+    feeRate = 0.5,
+    start = [10.765215, 106.692297],
+    endAddress
+  ) => dispatch(setDeliveryFee(feeRate, start, endAddress)),
   handleInputChange: (address, value) =>
     dispatch(handleInputChange(address, value)),
   previousStep: () => dispatch(decreaseStep()),

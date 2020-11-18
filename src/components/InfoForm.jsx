@@ -5,8 +5,8 @@ import { increaseStep } from "../redux/actions/checkOutStepActions";
 import "../App.css";
 import "../styles/CheckOut.css";
 
-const InfoForm = ({ values, formValidate, nextStep, handleInputChange }) => {
-  const { name, phone, mail } = formValidate;
+const InfoForm = ({ values, nextStep, handleInputChange }) => {
+  // const { name, phone, mail } = formValidate;
   return (
     <>
       <div className="inputField scroll-bar scroll-bar-transparent">
@@ -20,7 +20,7 @@ const InfoForm = ({ values, formValidate, nextStep, handleInputChange }) => {
             type="text"
             formNoValidate
           />
-          {name.length !== 0 && <p className="error">{name}</p>}
+          {/* {name.length !== 0 && <p className="error">{name}</p>} */}
         </div>
 
         <div>
@@ -33,7 +33,7 @@ const InfoForm = ({ values, formValidate, nextStep, handleInputChange }) => {
             type="text"
             formNoValidate
           />
-          {phone.length !== 0 && <p className="error">{phone}</p>}
+          {/* {phone.length !== 0 && <p className="error">{phone}</p>} */}
         </div>
 
         <div>
@@ -46,7 +46,7 @@ const InfoForm = ({ values, formValidate, nextStep, handleInputChange }) => {
             type="email"
             formNoValidate
           />
-          {mail.length !== 0 && <p className="error">{mail}</p>}
+          {/* {mail.length !== 0 && <p className="error">{mail}</p>} */}
         </div>
       </div>
       <div className="step-layout">

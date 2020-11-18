@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { handleInputChange } from "../redux/actions/checkOutInputActions";
+import { increaseStep } from "../redux/actions/checkOutStepActions";
 import "../App.css";
 import "../styles/CheckOut.css";
 
@@ -64,6 +65,7 @@ const mapStateToProps = ({ checkOutInput }) => ({
 const mapDispatchToProps = (dispatch) => ({
   handleInputChange: (e) =>
     dispatch(handleInputChange(e.target.name, e.target.value)),
+  nextStep: () => dispatch(increaseStep()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(InfoForm);

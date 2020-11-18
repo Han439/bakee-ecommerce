@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import "../App.css";
 import "../styles/CheckOut.css";
 import PopBox from "../hocs/PopBox";
@@ -7,19 +6,16 @@ import AddressForm from "./AddressForm";
 import InfoForm from "./InfoForm";
 import PlaceOrder from "./PlaceOrder";
 import Loader from "./Loader";
+import { connect } from "react-redux";
 import { orderSuccess, orderFail } from "../redux/actions/orderResultActions";
 import { closeCheckOutBox } from "../redux/actions/checkOutBoxActions";
 import { resetCart } from "../redux/actions/cartActions";
 import { increaseStep } from "../redux/actions/checkOutStepActions";
 
-/*global google*/
-
 const emailRegex = RegExp(
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
-
 const nameRegex = RegExp(/[a-zA-Z]{3,}/);
-
 const phoneRegex = RegExp(/[0-9]{9,}/);
 
 class CheckOut extends React.Component {
@@ -57,7 +53,6 @@ class CheckOut extends React.Component {
   isValidated = () => {
     const { step } = this.props;
     let valid = true;
-
     const { name, phone, mail, address } = this.validateInput();
 
     if (step === 0) {
@@ -73,34 +68,19 @@ class CheckOut extends React.Component {
     return valid;
   };
 
-  nextStep = () => {
-    let { step } = this.props;
-    step += 1;
-    if (this.isValidated()) {
-      if (step === 2) {
-        this.calculateDeliveryFee();
-      }
-      this.props.increaseStep();
-    }
-  };
-
   renderSwitch = (step) => {
     const { formValidate } = this.state;
-    const { name, phone, mail, address } = this.props.input;
     switch (step) {
       case 0:
         return (
           <InfoForm nextStep={this.nextStep} formValidate={formValidate} />
         );
       case 1:
-        return (
-          <AddressForm
-            onAddressChange={this.handleAddressChange}
-            formValidate={formValidate}
-          />
-        );
+        return <AddressForm formValidate={formValidate} />;
+
       case 2:
-        return <PlaceOrder handleSubmit={this.handleSubmit} />;
+        return <PlaceOrder />;
+
       default:
         return null;
     }

@@ -13,8 +13,6 @@ const PlaceOrder = ({
   values,
   paymentInfo,
   previousStep,
-  resetCart,
-  closeCheckOutBox,
   orderSuccess,
   orderFail,
 }) => {
@@ -45,8 +43,6 @@ const PlaceOrder = ({
           },
         })
         .then((response) => {
-          resetCart();
-          closeCheckOutBox();
           orderSuccess();
         })
         .catch((error) => {
@@ -124,12 +120,14 @@ const mapStateToProps = ({ cart, checkOutInput }) => ({
   paymentInfo: cart,
 });
 
-const mapDispatchToProps = {
-  previousStep: decreaseStep,
-  resetCart,
-  closeCheckOutBox,
-  orderSuccess,
-  orderFail,
-};
+const mapDispatchToProps = (dispatch) => ({
+  previousStep: () => dispatch(decreaseStep),
+  orderSuccess: () => {
+    dispatch(resetCart());
+    dispatch(closeCheckOutBox());
+    dispatch(orderSuccess());
+  },
+  orderFail: () => dispatch(orderFail()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlaceOrder);
